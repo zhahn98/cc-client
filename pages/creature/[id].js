@@ -45,15 +45,18 @@ export default function ViewCreature() {
           {/* Handles changing category plurality for proper english on UI */}
           {categoryCount > 0 ? (
             <>
-              <Card.Text>{categoryCount <= 1 ? 'Category:' : 'Categories:'}</Card.Text>
-              <Card.Text>
-                {viewCreature.category.map((category) => (
-                  <p key={category.id}>{category.label}</p>
+              <p>{categoryCount <= 1 ? 'Category:' : 'Categories:'}</p>
+              <p>
+                {viewCreature.category.map((category, index) => (
+                  <span key={category.id}>
+                    {category.label}
+                    {index < viewCreature.category.length - 1 ? ', ' : ''}
+                  </span>
                 ))}
-              </Card.Text>
+              </p>
             </>
           ) : (
-            <Card.Text>Categories: None</Card.Text>
+            <p>Categories: None</p>
           )}
           {(user.id === viewCreature.user?.id) ? (
             <Button
@@ -62,7 +65,7 @@ export default function ViewCreature() {
             >Edit Categories
             </Button>
           ) : (
-            <Button variant="primary" size="sm" disabled style={{ marginLeft: '10px' }}>
+            <Button variant="primary" disabled style={{ marginLeft: '10px' }}>
               Edit Categories
             </Button>
           )}

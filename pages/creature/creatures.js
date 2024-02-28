@@ -13,7 +13,6 @@ function AllCreaturesPage() {
 
   useEffect(() => {
     getAllCreatures();
-    console.warn(creatures);
   }, []);
 
   return (

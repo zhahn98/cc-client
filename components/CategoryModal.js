@@ -12,16 +12,15 @@ function CategoryModal({ creature, onUpdate }) {
   useEffect(() => {
     getCategories().then(setCategories);
   }, []);
-  console.warn('RETRIEVED CATEGORIES:', creature.category);
   // Function to handle deleting the last tag
   const deleteCategory = (categoryId, creatureId) => {
-    console.warn('deleted category', categoryId);
-    removeCategoryfromCreature(creatureId, categoryId).then(onUpdate(creatureId));
+    removeCategoryfromCreature(creatureId, categoryId)
+      .then(() => onUpdate(creatureId));
   };
 
   const addCategory = (categoryId, creatureId) => {
-    console.warn('added category ', categoryId);
-    addCategoryToCreature(creatureId, categoryId).then(onUpdate(creatureId));
+    addCategoryToCreature(creatureId, categoryId)
+      .then(() => onUpdate(creatureId));
   };
   // Checks if specific category is present when assigning categories
   const isCategoryInCreature = (creatureCategories, category) => creatureCategories.some((creatureCategory) => creatureCategory.id === category.id);
@@ -33,7 +32,6 @@ function CategoryModal({ creature, onUpdate }) {
     } else {
       addCategory(category.id, creature.id);
     }
-    console.warn('creatureCategories:', creatureCategories);
   };
 
   const [show, setShow] = useState(true);
