@@ -32,8 +32,8 @@ function CreatureForm({ obj }) {
       setFormInput({
         name: obj.name,
         lore: obj.lore,
-        imageUrl: obj.imageUrl,
-        rarity: obj.rarity,
+        imageUrl: obj.img,
+        rarity: obj.rarity.label,
       });
     }
   }, [obj]);
@@ -45,12 +45,9 @@ function CreatureForm({ obj }) {
       updateCreature(payload).then(() => router.push(`/creature/${obj.id}`));
     } else {
       const payload = { ...formInput, userId: user.id };
-      createCreature(payload).then(() => router.push('/'));
+      createCreature(payload).then(() => router.push('/creature/creatures'));
     }
   };
-
-  console.warn('User:', user);
-  console.warn('User.id', user.id);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -87,7 +84,7 @@ function CreatureForm({ obj }) {
           placeholder="Enter Creature's Lore:"
           style={{ height: '100px' }}
           name="lore"
-          value={formInput.content}
+          value={formInput.lore}
           onChange={handleChange}
           required
         />
@@ -95,14 +92,18 @@ function CreatureForm({ obj }) {
 
       {/* RARITY INPUT */}
       <FloatingLabel controlId="floatingInput3" label="Rarity" className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Enter Creature's Rarity:"
+        <Form.Select
           name="rarity"
           value={formInput.rarity}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="1">Common</option>
+          <option value="2">Uncommon</option>
+          <option value="3">Rare</option>
+          <option value="4">Ultra Rare</option>
+          {/* Add more options as needed */}
+        </Form.Select>
       </FloatingLabel>
 
       {/* SUBMIT BUTTON  */}
@@ -114,15 +115,20 @@ function CreatureForm({ obj }) {
 CreatureForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
-    imageUrl: PropTypes.string,
+    img: PropTypes.string,
     lore: PropTypes.string,
-    rarity: PropTypes.string,
+    rarity: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+    }),
     id: PropTypes.number,
   }),
 };
 
 CreatureForm.defaultProps = {
-  obj: initialState,
+  obj: {
+    ...initialState,
+    rarity: { label: '' },
+  },
 };
 
 export default CreatureForm;

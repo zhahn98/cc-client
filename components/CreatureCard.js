@@ -45,8 +45,11 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
             <>
               <p>{categoryCount <= 1 ? 'Category:' : 'Categories:'}</p>
               <p>
-                {creatureObj.category.map((category) => (
-                  <p key={category.id}>{category.label}</p>
+                {creatureObj.category.map((category, index) => (
+                  <span key={category.id}>
+                    {category.label}
+                    {index < creatureObj.category.length - 1 ? ', ' : ''}
+                  </span>
                 ))}
               </p>
             </>
@@ -79,9 +82,13 @@ CreatureCard.propTypes = {
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     lore: PropTypes.string.isRequired,
-    rarity: PropTypes.number.isRequired,
-    label: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    rarity: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+    }).isRequired,
+    category: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
     user: PropTypes.shape({
       id: PropTypes.number,
     }),
