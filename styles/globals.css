@@ -18,5 +18,10 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #e6f1f2;
+}
+
+.card-shadow {
+  border: 2px solid black;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 30px 16px rgba(0, 0, 0, 0.2);
 }

@@ -11,7 +11,7 @@ const initialState = {
   name: '',
   imageUrl: '',
   lore: '',
-  rarity: '',
+  rarity: '1',
 };
 
 function CreatureForm({ obj }) {

@@ -28,7 +28,7 @@ export default function NavBar() {
             <Link passHref href="/creature/new">
               <Nav.Link>New Creature</Nav.Link>
             </Link>
-            <Link passHref href="/">
+            <Link passHref href="/profile">
               <Nav.Link>Profile</Nav.Link>
             </Link>
           </Nav>
