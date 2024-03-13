@@ -20,12 +20,69 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
     </Button>
   ) : (''));
 
+  // Function to map category labels to colors
+  const getCategoryColor = (categoryLabel) => {
+    // Implement your logic to map category labels to colors here
+    // For example:
+    switch (categoryLabel.toLowerCase()) {
+      case 'cave':
+        return '#85947f';
+      case 'swamp':
+        return '#1d5c1d';
+      case 'jungle':
+        return '#3eab3e';
+      case 'ocean':
+        return '#6c96e6';
+      case 'volcano':
+        return '#c27748';
+      case 'sky':
+        return '#7ebcd9';
+      default:
+        return 'white'; // Default color
+    }
+  };
+  // Function to determine primary and secondary colors based on categories
+  const getColors = () => {
+    let primaryColor = 'white';
+    let secondaryColor = 'black'; // Default border color
+
+    if (creatureObj.category.length >= 1) {
+      primaryColor = getCategoryColor(creatureObj.category[0].label);
+    }
+    if (creatureObj.category.length >= 2) {
+      secondaryColor = getCategoryColor(creatureObj.category[1].label);
+    }
+
+    return { primaryColor, secondaryColor };
+  };
+
+  // Get primary and secondary colors
+  const { primaryColor, secondaryColor } = getColors();
+
   const categoryCount = creatureObj.category.length;
 
   return (
     <>
-      <Card className="text-center mx-auto col-md-3" style={{ border: '2px solid black' }}>
-        <Card.Header>{creatureObj.name}</Card.Header>
+      <Card
+        className="text-center col-md-3 creature-card"
+        style={{
+          border: `5px solid ${secondaryColor}`,
+          backgroundColor: primaryColor,
+          borderRadius: '40px',
+          padding: '10px',
+          margin: '0 10px 20px 0px',
+          transition: 'transform 0.3s ease',
+        }}
+      >
+        <Card.Header style={{
+          fontWeight: 'bold',
+          fontSize: '1.5em',
+          fontFamily: 'Courier New, monospace',
+          textShadow: '2px 2px 5px white',
+        }}
+        >
+          {creatureObj.name}
+        </Card.Header>
         <Card.Img
           variant="top"
           src={creatureObj.img}
@@ -35,9 +92,10 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
             width: '100%',
             boxShadow: '0px 1rem 1.5rem rgba(0, 0, 0, 0.5)',
             objectFit: 'fill',
+            border: '2px solid black',
           }}
         />
-        <Card.Body>
+        <Card.Body style={{ fontSize: '1.0em', fontFamily: 'Andale Mono, monospace' }}>
           <p>Lore: {creatureObj.lore}</p>
           <p>Rarity: {creatureObj.rarity.label}</p>
           {/* Handles changing category plurality for proper english on UI */}
