@@ -25,3 +25,17 @@ body {
   border: 2px solid black;
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 30px 16px rgba(0, 0, 0, 0.2);
 }
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust column widths */
+  grid-gap: 20px; /* Add space between cards */
+}
+
+.creature-card {
+  transition: all 0.3s ease;
+}
+
+.creature-card:hover {
+  transform: scale(1.05); /* Increase size by 10% on hover */
+}
