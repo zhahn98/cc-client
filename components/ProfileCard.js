@@ -5,7 +5,7 @@ import { useAuth } from '../utils/context/authContext';
 export default function ProfileCard() {
   const { user } = useAuth();
   return (
-    <Card className="card-shadow" style={{ width: '325px', height: '600px' }}>
+    <Card className="card-shadow" style={{ width: '325px', height: '400px' }}>
       <Card.Header style={{ fontWeight: 'bold', fontSize: '2.0em', fontFamily: 'Courier New, monospace' }}>{user.fbUser.displayName}</Card.Header>
       <Card.Img
         variant="top"
@@ -18,7 +18,6 @@ export default function ProfileCard() {
           objectFit: 'fill',
         }}
       />
-      <Card.Body style={{ fontSize: '1.9em', fontFamily: 'Andale Mono, monospace' }}>This is where a short bio would go.</Card.Body>
     </Card>
   );
 }

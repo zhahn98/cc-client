@@ -11,7 +11,7 @@ import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light" style={{ fontFamily: 'Andale Mono, monospace' }}>
       <Container>
         <Link passHref href="/">
           <Navbar.Brand>Creature Creations</Navbar.Brand>

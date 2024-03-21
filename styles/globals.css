@@ -19,11 +19,13 @@ a {
 
 body {
   background-color: #e6f1f2;
+  background-image: url(../components/images/paper_bg.jpg);
+  /* background-size: 30%; */
 }
 
 .card-shadow {
   border: 2px solid black;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 30px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 30px 20px 20px rgba(0, 0, 0, 0.4), 0 30px 16px rgba(0, 0, 0, 0.3);
 }
 
 .card-container {

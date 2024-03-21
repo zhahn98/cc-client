@@ -17,8 +17,8 @@ function Home() {
   }, []);
 
   return (
-    <div style={{ padding: '50px', display: 'flex', justifyContent: 'space-between' }}>
-      <div style={{ marginRight: '20px' }}>
+    <div style={{ padding: '50px', display: 'flex', justifyContent: 'flex-start' }}>
+      <div style={{ marginRight: '200px' }}>
         <HomeInfo />
       </div>
       {randomCreature && (

@@ -15,13 +15,16 @@ function Signin() {
         width: '100%',
         minWidth: '30rem',
         paddingBlock: '0 5rem',
+        fontFamily: 'Courier New, monospace',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
-        Sign In
-      </Button>
+      <h1>Welcome to Creature Creations!</h1>
+      <p>Click the button below to sign in!</p>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button type="button" size="lg" className="copy-btn" onClick={signIn} style={{ width: '200px' }}>
+          Sign In
+        </Button>
+      </div>
     </div>
   );
 }
