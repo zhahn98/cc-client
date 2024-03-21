@@ -16,16 +16,21 @@ function Profile() {
     getAllMyCreatures();
   }, []);
 
-  console.warn(user);
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ marginRight: '20px' }}>
+    <div style={{ fontFamily: 'Andale Mono, monospace', textAlign: 'center' }}>
+      <div style={{
+        marginBottom: '50px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+      >
         <h1>My Profile:</h1>
         <ProfileCard />
       </div>
-      <div style={{ textAlign: 'center' }}>
+      <div className="text-center my-4">
         <h1>My Creatures:</h1>
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div className="d-flex flex-wrap" style={{ justifyContent: 'space-evenly' }}>
           {creatures.map((creature) => (
             <CreatureCard key={creature.id} creatureObj={creature} onUpdate={getAllMyCreatures} />
           ))}

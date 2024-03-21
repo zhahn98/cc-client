@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -29,11 +29,17 @@ function CreatureForm({ obj }) {
 
   useEffect(() => {
     if (obj.id) {
+      const rarityLabelsToValues = {
+        Common: '1',
+        Uncommon: '2',
+        Rare: '3',
+        'Ultra Rare': '4',
+      };
       setFormInput({
         name: obj.name,
         lore: obj.lore,
         imageUrl: obj.img,
-        rarity: obj.rarity.label,
+        rarity: rarityLabelsToValues[obj.rarity.label],
       });
     }
   }, [obj]);
@@ -50,8 +56,8 @@ function CreatureForm({ obj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h2 className="text-warning mt-5">{obj.id ? 'Update' : 'Create'} Creature</h2>
+    <Form onSubmit={handleSubmit} style={{ fontFamily: 'Courier New, monospace' }}>
+      <h2 className="mt-5"><b>{obj.id ? 'Update' : 'Create'} Creature:</b></h2>
 
       {/* NAME INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="Creature Name" className="mb-3">

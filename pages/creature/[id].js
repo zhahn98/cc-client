@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Card, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { getSingleCreature } from '../../api/CreatureData';
 import CategoryModal from '../../components/CategoryModal';
+import CreatureCard from '../../components/CreatureCard';
 
 export default function ViewCreature() {
   const [viewCreature, setCreature] = useState(null);
@@ -30,50 +31,35 @@ export default function ViewCreature() {
   // Function to toggle the visibility of the Modal
   const toggleCategoryModal = () => setShowCategoryModal(!showCategoryModal);
 
-  const categoryCount = viewCreature.category.length;
+  // const categoryCount = viewCreature.category.length;
 
   return (
     <div>
-      <div className="text-center mt-3">
-        <h1>Creature Details:</h1>
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+        {viewCreature && (
+        <CreatureCard creatureObj={viewCreature} onUpdate={() => {}} />
+        )}
       </div>
-      <Card className="text-center mx-auto col-md-5" style={{ border: '2px solid black' }}>
-        <Card.Header>Creature Name: {viewCreature.name}</Card.Header>
-        <Card.Body>
-          <Card.Text>Lore: {viewCreature.lore}</Card.Text>
-          <Card.Text>Rarity: {viewCreature.rarity.label}</Card.Text>
-          {/* Handles changing category plurality for proper english on UI */}
-          {categoryCount > 0 ? (
-            <>
-              <p>{categoryCount <= 1 ? 'Category:' : 'Categories:'}</p>
-              <p>
-                {viewCreature.category.map((category, index) => (
-                  <span key={category.id}>
-                    {category.label}
-                    {index < viewCreature.category.length - 1 ? ', ' : ''}
-                  </span>
-                ))}
-              </p>
-            </>
-          ) : (
-            <p>Categories: None</p>
-          )}
-          {(user.id === viewCreature.user?.id) ? (
-            <Button
-              variant="primary"
-              onClick={toggleCategoryModal}
-            >Edit Categories
-            </Button>
-          ) : (
-            <Button variant="primary" disabled style={{ marginLeft: '10px' }}>
-              Edit Categories
-            </Button>
-          )}
-          <Card.Text>Created by: User #{viewCreature.user.id}</Card.Text>
-        </Card.Body>
-      </Card>
-      {/* Modal for editing categories */}
-      {showCategoryModal && <CategoryModal creature={viewCreature} show={showCategoryModal} onHide={toggleCategoryModal} onUpdate={getCreature} />}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        minWidth: '200px',
+        fontFamily: 'Courier New, monospace',
+      }}
+      >
+        {(user.id === viewCreature.user?.id) ? (
+          <Button
+            variant="info"
+            onClick={toggleCategoryModal}
+          >EDIT CATEGORIES
+          </Button>
+        ) : (
+          <Button variant="info" disabled style={{ marginLeft: '10px', marginBottom: '30px' }}>
+            EDIT CATEGORIES
+          </Button>
+        )}
+        {showCategoryModal && <CategoryModal creature={viewCreature} show={showCategoryModal} onHide={toggleCategoryModal} onUpdate={getCreature} />}
+      </div>
     </div>
   );
 }

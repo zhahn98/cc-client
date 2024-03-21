@@ -15,15 +15,13 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
   };
 
   const editMyCreature = () => (user.id === creatureObj.user?.id ? (
-    <Button variant="outline-info" style={{ boxShadow: '0px 1rem 1.5rem rgba(0, 0, 0, 0.5)' }}>
+    <Button variant="info" style={{ boxShadow: '0px 1rem 1.5rem rgba(0, 0, 0, 0.5)' }}>
       EDIT
     </Button>
   ) : (''));
 
-  // Function to map category labels to colors
+  // Assigns category labels to colors
   const getCategoryColor = (categoryLabel) => {
-    // Implement your logic to map category labels to colors here
-    // For example:
     switch (categoryLabel.toLowerCase()) {
       case 'cave':
         return '#85947f';
@@ -41,9 +39,10 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
         return 'white'; // Default color
     }
   };
+
   // Function to determine primary and secondary colors based on categories
   const getColors = () => {
-    let primaryColor = 'white';
+    let primaryColor = 'white'; // Default background color
     let secondaryColor = 'black'; // Default border color
 
     if (creatureObj.category.length >= 1) {
@@ -64,13 +63,13 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
   return (
     <>
       <Card
-        className="text-center col-md-3 creature-card"
+        className="text-center col-md-3 creature-card card-shadow"
         style={{
           border: `5px solid ${secondaryColor}`,
-          backgroundColor: primaryColor,
+          background: `linear-gradient(to bottom, ${primaryColor} 0%, black 160%)`,
           borderRadius: '40px',
           padding: '10px',
-          margin: '0 10px 20px 0px',
+          margin: '0 10px 30px 0px',
           transition: 'transform 0.3s ease',
         }}
       >
@@ -96,12 +95,12 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
           }}
         />
         <Card.Body style={{ fontSize: '1.0em', fontFamily: 'Andale Mono, monospace' }}>
-          <p>Lore: {creatureObj.lore}</p>
-          <p>Rarity: {creatureObj.rarity.label}</p>
+          <p><b>Lore</b>: {creatureObj.lore}</p>
+          <p><b>Rarity</b>: {creatureObj.rarity.label}</p>
           {/* Handles changing category plurality for proper english on UI */}
           {categoryCount > 0 ? (
             <>
-              <p>{categoryCount <= 1 ? 'Category:' : 'Categories:'}</p>
+              <b>{categoryCount <= 1 ? 'Category:' : 'Categories:'}</b>
               <p>
                 {creatureObj.category.map((category, index) => (
                   <span key={category.id}>
@@ -124,7 +123,7 @@ export default function CreatureCard({ creatureObj, onUpdate }) {
             {editMyCreature()}
           </Link>
           {(user.id === creatureObj.user?.id) ? (
-            <Button variant="outline-danger" onClick={deleteThisCreature} className="m-2">
+            <Button variant="danger" onClick={deleteThisCreature} className="m-2">
               DELETE
             </Button>
           ) : ('')}
